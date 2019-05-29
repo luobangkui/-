@@ -19,6 +19,39 @@ func contain(a []int,i int) bool {
 	return false
 }
 
+func checkA(a []int) bool {
+	if len(a)!= 5{
+		fmt.Println("输入有误，请输入5位数字\n")
+		return false
+	}
+
+	for _,v := range a {
+		if v>35 || v<= 0{
+			fmt.Println("输入数字有误:",v)
+			fmt.Println()
+			return false
+		}
+	}
+	return true
+}
+
+func checkB(b []int) bool {
+	if len(b)!= 2{
+		fmt.Println("输入有误，请输入2位数字\n")
+		return false
+	}
+
+	for _,v := range b {
+		if v>12 || v<= 0{
+			fmt.Println("输入数字有误:",v)
+			fmt.Println()
+			return false
+		}
+	}
+	return true
+}
+
+
 func getNumbers(a []int,b[]int)  {
 	rand.Seed(time.Now().Unix())
 
@@ -87,9 +120,15 @@ func main() {
 			if scanner.Scan(){
 				a = numbers(scanner.Text())
 			}
+			if !checkA(a) {
+				continue
+			}
 			fmt.Println("请输入后两个数字")
 			if scanner.Scan(){
 				b = numbers(scanner.Text())
+			}
+			if !checkB(b) {
+				continue
 			}
 
 			fmt.Println("请输入要生成的号码个数：")
