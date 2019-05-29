@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"time"
 	"os"
+	"bufio"
+	"strings"
+	"strconv"
 )
 
 func contain(a []int,i int) bool {
@@ -57,6 +60,18 @@ func getNumbers(a []int,b[]int)  {
 	time.Sleep(1*time.Second)
 }
 
+func numbers(s string) []int {
+	var n []int
+	for _, f := range strings.Fields(s) {
+		i, err := strconv.Atoi(f)
+		if err == nil {
+			n = append(n, i)
+		}
+	}
+	return n
+}
+
+
 func main() {
 	//
 
@@ -66,82 +81,33 @@ func main() {
 		for {
 			var a  = make([]int,0,5)
 			var b  = make([]int,0,5)
-			goOn := true
-			for i := 0;i<5;i++ {
-				if i == 0 {
-					fmt.Println("请输入前五位数字（以数字结束，超过5个数取前五个数）：")
-				}
-				var t int
 
-				_, err := fmt.Scanf("%d", &t)
-				if err != nil {
-					fmt.Println(err)
-					goOn = false
-					break
-				}
-				if t <= 0 || t > 35 {
-					fmt.Println("超过1-35范围，数字输入错误，请重新输入")
-					goOn = false
-					break
-				}
-				if !contain(a, t) {
-					a = append(a, t)
-				} else {
-					goOn = false
-					fmt.Println("数字重复，重新输入")
-					break
-				}
+			scanner := bufio.NewScanner(os.Stdin)
+			fmt.Println("请输入前5个数字")
+			if scanner.Scan(){
+				a = numbers(scanner.Text())
 			}
-			if len(a) > 5 {
-				fmt.Println("超过5位长度")
-				break
+			fmt.Println("请输入后两个数字")
+			if scanner.Scan(){
+				b = numbers(scanner.Text())
 			}
-			if !goOn {
-				break
-			}
-			time.Sleep(50*time.Millisecond)
 
-			for i:=0; i<2;i++ {
-				if i ==0{
-					fmt.Println("请输入后两位数字（以数字结束，超过2个数取前2个数）：")
-				}
-				var t int
-				_,err := fmt.Scanf("%d",&t)
-				if err != nil {
-					fmt.Println(err)
-					goOn = false
-					break
-				}
-				if t<=0 || t>12 {
-					fmt.Println("超过1-12范围，请重新输入")
-					goOn = false
-					break
-				}
-				if !contain(b,t){
-					b = append(b,t)
-				} else {
-					goOn = false
-					fmt.Println("数字重复，重新输入")
-					break
-				}
+			fmt.Println("请输入要生成的号码个数：")
+			var n int
+			_,err := fmt.Scanf("%d",&n)
+			if err != nil {
+				fmt.Println("输入有误，退出")
+				cancel <- 0
 			}
-			if goOn {
-				fmt.Println("请输入要生成的号码个数：")
-				var n int
-				_,err := fmt.Scanf("%d",&n)
-				if err != nil {
-					cancel <- 0
-				}
 
-				for j := 0;j<n;j++{
-					var ac  = make([]int,5,5)
-					var bc  = make([]int,2,2)
-					copy(ac,a)
-					copy(bc,b)
-					getNumbers(ac,bc)
-				}
-				os.Exit(0)
+			for j := 0;j<n;j++{
+				var ac  = make([]int,5,5)
+				var bc  = make([]int,2,2)
+				copy(ac,a)
+				copy(bc,b)
+				getNumbers(ac,bc)
 			}
+			os.Exit(0)
 
 		}
 	}()
