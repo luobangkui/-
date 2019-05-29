@@ -51,14 +51,10 @@ func checkB(b []int) bool {
 	return true
 }
 
-
-func getNumbers(a []int,b[]int)  {
-	rand.Seed(time.Now().Unix())
-
-	//随机替换3个位置的数
-	for changed := 0;changed<3;{
+func reserveA(a []int,n int) {
+	for changed := 0;changed<n;{
 		for i,_ := range a {
-			if changed == 3 {
+			if changed == n {
 				break
 			}
 			p := rand.Float64()
@@ -71,11 +67,13 @@ func getNumbers(a []int,b[]int)  {
 			}
 		}
 	}
+}
 
-	//随机替换1个位置的数
-	for changed := 0;changed<1;{
+
+func reserveB(b []int,n int) {
+	for changed := 0;changed<n;{
 		for i,_ := range b {
-			if changed == 1 {
+			if changed == n {
 				break
 			}
 			p := rand.Float64()
@@ -88,6 +86,21 @@ func getNumbers(a []int,b[]int)  {
 			}
 		}
 	}
+}
+
+
+func getNumbers(a []int,b[]int)  {
+	rand.Seed(time.Now().Unix())
+
+	//随机替换3个位置的数
+	reserveA(a,3)
+
+	reserveA(a,2)
+
+	//随机替换1个位置的数
+	reserveB(b,1)
+
+	reserveB(b,1)
 
 	fmt.Println(a,b)
 	time.Sleep(1*time.Second)
