@@ -108,7 +108,7 @@ func numbers(s string) []int {
 func main() {
 	//
 
-	cancel := make(chan int,1)
+	cancel := make(chan int)
 
 	go func() {
 		for {
@@ -146,8 +146,7 @@ func main() {
 				copy(bc,b)
 				getNumbers(ac,bc)
 			}
-			os.Exit(0)
-
+			fmt.Println()
 		}
 	}()
 
