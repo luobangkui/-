@@ -67,56 +67,62 @@ func main() {
 			var a  = make([]int,0,5)
 			var b  = make([]int,0,5)
 			goOn := true
-			for i := 0;i<7;i++{
+			for i := 0;i<5;i++ {
 				if i == 0 {
-					fmt.Println("请输入前五位数字：")
-				}
-				if i == 5 {
-					fmt.Println("请输入后两位数字：")
+					fmt.Println("请输入前五位数字（以数字结束，超过5个数取前五个数）：")
 				}
 				var t int
 
-				if i <5 {
-					_,err := fmt.Scanf("%d",&t)
-					if err != nil {
-						fmt.Println(err)
-						goOn = false
-						break
-					}
-					if t<=0 || t>35 {
-						fmt.Println("超过1-35范围，数字输入错误，请重新输入")
-						goOn = false
-						break
-					}
-					if !contain(a,t){
-						a = append(a,t)
-					} else {
-						goOn = false
-						fmt.Println("数字重复，重新输入")
-						break
-					}
-
+				_, err := fmt.Scanf("%d", &t)
+				if err != nil {
+					fmt.Println(err)
+					goOn = false
+					break
 				}
+				if t <= 0 || t > 35 {
+					fmt.Println("超过1-35范围，数字输入错误，请重新输入")
+					goOn = false
+					break
+				}
+				if !contain(a, t) {
+					a = append(a, t)
+				} else {
+					goOn = false
+					fmt.Println("数字重复，重新输入")
+					break
+				}
+			}
+			if len(a) > 5 {
+				fmt.Println("超过5位长度")
+				break
+			}
+			if !goOn {
+				break
+			}
+			time.Sleep(50*time.Millisecond)
 
-				if i >=5 {
-					_,err := fmt.Scanf("%d",&t)
-					if err != nil {
-						fmt.Println(err)
-						goOn = false
-						break
-					}
-					if t<=0 || t>12 {
-						fmt.Println("超过1-12范围，请重新输入")
-						goOn = false
-						break
-					}
-					if !contain(b,t){
-						b = append(b,t)
-					} else {
-						goOn = false
-						fmt.Println("数字重复，重新输入")
-						break
-					}
+			for i:=0; i<2;i++ {
+				if i ==0{
+					fmt.Println("请输入后两位数字（以数字结束，超过2个数取前2个数）：")
+				}
+				var t int
+				_,err := fmt.Scanf("%d",&t)
+				if err != nil {
+					fmt.Println(err)
+					goOn = false
+					break
+				}
+				if t<=0 || t>12 {
+					fmt.Println("超过1-12范围，请重新输入")
+					goOn = false
+					break
+				}
+				if !contain(b,t){
+					b = append(b,t)
+				} else {
+					goOn = false
+					fmt.Println("数字重复，重新输入")
+					break
 				}
 			}
 			if goOn {
