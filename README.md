@@ -10,3 +10,5 @@
 
 mac系统直接执行daletou-mac<br><br>
 windows直接执行daletou-win.exe
+
+![](example.jpg)
