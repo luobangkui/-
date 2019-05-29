@@ -11,4 +11,4 @@
 mac系统直接执行daletou-mac<br><br>
 windows直接执行daletou-win.exe
 
-[](https://github.com/luobangkui/daletou-numbers/blob/master/example.jpg)
+![](example.jpg)
