@@ -51,7 +51,7 @@ func checkB(b []int) bool {
 	return true
 }
 
-func reserveA(a []int,n int) {
+func transformA(a []int,n int) {
 	for changed := 0;changed<n;{
 		for i,_ := range a {
 			if changed == n {
@@ -70,7 +70,7 @@ func reserveA(a []int,n int) {
 }
 
 
-func reserveB(b []int,n int) {
+func transformB(b []int,n int) {
 	for changed := 0;changed<n;{
 		for i,_ := range b {
 			if changed == n {
@@ -93,14 +93,14 @@ func getNumbers(a []int,b[]int)  {
 	rand.Seed(time.Now().Unix())
 
 	//随机替换3个位置的数
-	reserveA(a,3)
+	transformA(a,3)
 
-	reserveA(a,2)
+	transformA(a,2)
 
 	//随机替换1个位置的数
-	reserveB(b,1)
+	transformB(b,1)
 
-	reserveB(b,1)
+	transformB(b,1)
 
 	fmt.Println(a,b)
 	time.Sleep(1*time.Second)
